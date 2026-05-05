@@ -4,15 +4,16 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const refs = {
   gallery: document.querySelector('.gallery'),
   loader: document.querySelector('.loader'),
+  loadMoreBtn: document.querySelector('.load-more'),
 };
 
-// ініціалізація lightbox
+// 🔍 Lightbox
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
-// створення розмітки ОДНОЇ картинки
+// 🧱 створення однієї картки
 function createImageCard(image) {
   return `
     <li class="gallery-item">
@@ -34,26 +35,35 @@ function createImageCard(image) {
   `;
 }
 
-// створення галереї
+// 🖼 створення галереї
 export function createGallery(images) {
   const markup = images.map(createImageCard).join('');
 
   refs.gallery.insertAdjacentHTML('beforeend', markup);
-
   lightbox.refresh();
 }
 
-// очистка галереї
+// 🧹 очистка галереї
 export function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 
-// показ loader
+// ⏳ показ loader
 export function showLoader() {
   refs.loader.classList.remove('is-hidden');
 }
 
-// приховати loader
+// ❌ приховати loader
 export function hideLoader() {
   refs.loader.classList.add('is-hidden');
+}
+
+// ➕ показ кнопки
+export function showLoadMoreButton() {
+  refs.loadMoreBtn.classList.remove('is-hidden');
+}
+
+// ➖ приховати кнопку
+export function hideLoadMoreButton() {
+  refs.loadMoreBtn.classList.add('is-hidden');
 }
